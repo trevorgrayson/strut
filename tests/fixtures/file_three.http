@@ -1,0 +1,20 @@
+GET /kittens
+Content-Type: application/json
+
+{'name': 'spot', 'owner': 'data'}
+
+POST /kittens
+Content-Type: application/json
+
+{'name': 'spot', 'owner': 'data'}
+
+PUT /kittens
+Content-Type: application/json
+
+{'name': 'spot', 'owner': 'data'}
+
+PUT /dogs
+Content-Type: application/json
+
+{'name': 'spot', 'owner': 'data'}
+

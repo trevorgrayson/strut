@@ -1,0 +1,5 @@
+GET /kittens
+Content-Type: application/json
+
+{'name': 'spot', 'owner': 'data'}
+

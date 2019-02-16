@@ -1,0 +1,7 @@
+GET /kittens
+
+POST /kittens
+Content-Type: application/json
+
+{"name": "string", owner: "string", created: "2019-02-13T00:00:00"}
+

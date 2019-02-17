@@ -1,4 +1,4 @@
-# struct
+# strut
 
 Using the HTTP formatting standard to define web endpoints.
 
@@ -12,29 +12,61 @@ the HTTP standard (which may already be known by the developer) it may be quicke
 to define APIs.
 
 
-## Documenting
+## Features
+
+### Documenting
 
 By generating [Swagger](https://swagger.io/) yaml/json this project can tap into a rich
-community of GUI definitions
+community of GUI definitions.
 
-## Testing
+### Testing
 
 This format should lead to be able to infer standard [Gherkin Syntax](https://docs.cucumber.io/gherkin/)
 tests, that could automatically generate testing.
 
-## Code Generation
+```
+./bin/strut gherkin definition.http
+```
+
+### Code Generation
 
 By compiling down to Swagger code, server code can be generated.  See an example implementation on 
 [editor.swagger.io/](http://editor.swagger.io/) under the "Generate Server" tab.
 
+```
+./bin/strut swagger definition.http
+```
 
-## Sources
+### Web Scripting
 
-### Reading `.http` Files
+`http` files can describe a procedural list of requests to make to a webserver. 
+This can be used to script requests to a service, potentially multiple services 
+in future iterations.
 
-By adding standard HTTP Messages (as defined by [rfc2616](https://tools.ietf.org/html/rfc2616)) with each separated by 
-?double newline? characters (like between headers and bodies), that file can be read in to get an `list` of `HttpRequest`
-objects.
+### Scripts
+
+To convert a `.http` file into a swagger document:
+
+```
+# yaml
+./bin/strut swagger filename.http
+
+# json 
+./bin/strut swagger-json filename.http
+
+```
+
+TODO FTL to convert between formats?
+
+### Definitions
+
+#### `.http` Files
+
+`.http` files are composed of a collection of HTTP Messages, which can be used 
+to describe a service.  Standard HTTP Messages (as defined by 
+[rfc2616](https://tools.ietf.org/html/rfc2616)) with each separated by 
+?double newline? characters (in the same way as headers and bodies are 
+separated), that file can be read in as a `list` of `HttpRequest` objects.
 
 ```
 from parser import HttpRequest
@@ -44,12 +76,12 @@ requests = HttpRequest.parse_file("filename.http")
 
 ### Spec Aggregation as a Service
 
-By setting up a web service locally, you can use a web browser, curl, Postman, or any other
-HTTP client to hit your local webservice, and accumlate a specification.  The can be saved to a file
-for reusability.
+By setting up a web service locally, you can use a web browser, curl, Postman, 
+or any other HTTP client to hit your local webservice, and accumulate a 
+specification.  This can be saved to a `.http` formatted file for reusability.
 
 
-## Project
+## Project Life Cycle
 
 ### Testing the Project
 

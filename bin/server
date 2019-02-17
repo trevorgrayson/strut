@@ -1,0 +1,19 @@
+#!/usr/bin/env python -s
+
+import SocketServer
+
+from server.http_server import serialize, DocHandler
+
+PORT = 4110
+
+httpd = SocketServer.TCPServer(("", PORT), DocHandler)
+
+if __name__ == "__main__":
+    print "serving at port", PORT
+
+    try: 
+        httpd.serve_forever()
+
+    except KeyboardInterrupt as ex:
+        httpd.server_close()
+

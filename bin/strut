@@ -2,34 +2,25 @@
 
 import sys
 from parser import HttpRequest
-from renderers.swagger import SwaggerRenderer
-
-def swagger_json(requests):
-    return SwaggerRenderer.json(requests)
-
-def swagger_yaml(requests):
-    return SwaggerRenderer.yaml(requests)
+from renderers import ACTIONS
 
 
-ACTIONS = {
-  'swagger': swagger_yaml,
-  'swagger-yaml': swagger_yaml,
-  'swagger-json': swagger_json,
-}
+def unknown_args(_=None):
+    sys.stdout.write("strut {%s} filename.http\n" % "|".join(ACTIONS.keys()))
+    quit()
 
 
 if __name__ == "__main__":
 
   if len(sys.argv) < 2:
-     sys.stdout.write("strut {swagger} filename.http")
-     quit()
+      unknown_args()
 
   action = sys.argv[1]
   filename = sys.argv[2]
 
-  method = ACTIONS.get(action)
+  func = ACTIONS.get(action, unknown_args)
 
   requests = HttpRequest.parse_file(filename)
 
-  sys.stdout.write(method(requests))
+  sys.stdout.write(func(requests))
 

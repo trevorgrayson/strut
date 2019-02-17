@@ -1,71 +1,29 @@
-# struct
+# strut
 
 Using HTTP formatting standards to simplify defining web APIs.
 
 The Swagger/OpenAPI specifications are generally ubiquitous and extremely useful.  The 
-difficulty comes in when having to remember the fieldnames exactly, or how the document
-is structured.  Required fields lead to a lot of noise when compiling them.
+difficulty comes in when having to remember the field names, or how the document
+is structured.  Required fields lead to a lot of noise when compiling swagger.
 
-It is the purpose of this specification to make defining HTTP endpoints much easier by 
-making a more intuitive entry system.  By minimizing format and structure, and by leveraging
-the HTTP standard (which may already be known by the developer) it may be quicker and easier
+It is the purpose of this specification to make defining HTTP endpoints much easier with more intuitive entry.  By minimizing format and structure, and by leveraging HTTP standards (which may already be known by the developer) it may be quicker and easier
 to define APIs.
 
-
-## Features
-
-### Documentation
-
-By generating [Swagger](https://swagger.io/) yaml/json this project can tap into a rich
-community of GUI definitions.
-
-To convert a `.http` file into a swagger document:
+## Installation
 
 ```
-# yaml
-./strut swagger filename.http
-
-# json 
-./strut swagger-json filename.http
-
+pip install strut
 ```
-
-### Testing
-
-This format should lead to be able to infer standard [Gherkin Syntax](https://docs.cucumber.io/gherkin/)
-tests, that could automatically generate testing.
-
-```
-./struct gherkin definition.http
-```
-
-### Code Generation
-
-By compiling down to Swagger code, server code can be generated.  See an example implementation on 
-[editor.swagger.io/](http://editor.swagger.io/) under the "Generate Server" tab.
-
-```
-./struct swagger definition.http
-```
-
-### Web Scripting
-
-`http` files can describe a procedural list of requests to make to a webserver. 
-This can be used to script requests to a service, potentially multiple services 
-in future iterations.
-
 
 ## Creating Definitions
 
-In order to get use out of this library there are several ways of inputing definitions easily.
+In order to get use out of this library there are several ways of constructing definitions easily.
 
 ### `.http` Files
 
 `.http` files are composed of a collection of HTTP Messages, which can be used 
 to describe a service.  Standard HTTP Messages (as defined by 
-[rfc2616](https://tools.ietf.org/html/rfc2616)) with each separated by 
-?double newline? characters (in the same way as headers and bodies are 
-separated), that file can be read in as a `list` of `HttpRequest` objects.
+[rfc2616](https://tools.ietf.org/html/rfc2616)) with each separated by double newline characters (in the same way HTTP headers and bodies are separated.)  Files can be read in as a `list` of `HttpRequest` objects.
 
 The simplest definition can be acheived with `\n\n` separated [Http Message Request lines](https://tools.ietf.org/html/rfc2616#section-4).
 
@@ -78,15 +36,12 @@ Content-Type: application/json
 ```
 
 ```
-from parser import HttpRequest
-
-requests = HttpRequest.parse_file("filename.http")
+strut swagger filename.http
 ```
 
 ### Spec Aggregation as a Service
 
-By running the `./strut-server` script locally, you can use a web browser, curl, [Postman](https://www.getpostman.com/), 
-or any other HTTP client to hit the service, and easily accumulate a specification.  
+By running the `strut-server` script locally, you can use a web browser, curl, [Postman](https://www.getpostman.com/), or any other HTTP client to hit the service, and easily accumulate a specification.  
 
 This can be saved to a `.http` formatted file for reusability.
 
@@ -94,7 +49,7 @@ An example of this technique could be the following:
 
 ```
 pip install strut
-./strut-server &
+strut-server &
 > serving at port 4110
 
 curl http://localhost:4110/kittens/
@@ -131,6 +86,48 @@ paths:
           description: ''
 
 ```
+
+## Features
+
+### Documentation
+
+By generating [Swagger](https://swagger.io/) yaml/json this project can tap into a rich
+community of GUI definitions.
+
+To convert a `.http` file into a swagger document:
+
+```
+# yaml
+strut swagger filename.http
+
+# json 
+strut swagger-json filename.http
+
+```
+
+### Testing
+
+This format should lead to be able to infer standard [Gherkin Syntax](https://docs.cucumber.io/gherkin/)
+tests, that could automatically generate testing.
+
+```
+strut gherkin definition.http
+```
+
+### Code Generation
+
+By compiling down to Swagger code, server code can be generated.  See an example implementation on 
+[editor.swagger.io/](http://editor.swagger.io/) under the "Generate Server" tab.
+
+```
+strut swagger definition.http
+```
+
+### Web Scripting
+
+`http` files can describe a procedural list of requests to make to a webserver. 
+This can be used to script requests to a service, potentially multiple services 
+in future iterations.
 
 ## Project Life Cycle
 

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="strut",
-    version="1.0.1",
+    version="1.1.1",
     author="trevor grayson",
     author_email="trevor@ipsumllc.com",
     description="Define HTTP APIs easily.",

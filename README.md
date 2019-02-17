@@ -23,10 +23,10 @@ To convert a `.http` file into a swagger document:
 
 ```
 # yaml
-./bin/strut swagger filename.http
+./strut swagger filename.http
 
 # json 
-./bin/strut swagger-json filename.http
+./strut swagger-json filename.http
 
 ```
 
@@ -36,7 +36,7 @@ This format should lead to be able to infer standard [Gherkin Syntax](https://do
 tests, that could automatically generate testing.
 
 ```
-./bin/struct gherkin definition.http
+./struct gherkin definition.http
 ```
 
 ### Code Generation
@@ -45,7 +45,7 @@ By compiling down to Swagger code, server code can be generated.  See an example
 [editor.swagger.io/](http://editor.swagger.io/) under the "Generate Server" tab.
 
 ```
-./bin/struct swagger definition.http
+./struct swagger definition.http
 ```
 
 ### Web Scripting
@@ -85,7 +85,7 @@ requests = HttpRequest.parse_file("filename.http")
 
 ### Spec Aggregation as a Service
 
-By running the `./bin/server` script locally, you can use a web browser, curl, [Postman](https://www.getpostman.com/), 
+By running the `./strut-server` script locally, you can use a web browser, curl, [Postman](https://www.getpostman.com/), 
 or any other HTTP client to hit the service, and easily accumulate a specification.  
 
 This can be saved to a `.http` formatted file for reusability.
@@ -93,7 +93,8 @@ This can be saved to a `.http` formatted file for reusability.
 An example of this technique could be the following:
 
 ```
-./bin/server &
+pip install strut
+./strut-server &
 > serving at port 4110
 
 curl http://localhost:4110/kittens/
@@ -139,3 +140,4 @@ paths:
 pytest
 ```
 
+### Parsing and Rendering

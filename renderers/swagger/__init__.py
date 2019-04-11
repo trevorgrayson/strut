@@ -3,13 +3,6 @@ import yaml
 
 
 class SwaggerRenderer():
-    @classmethod
-    def yaml(cls, requests):
-        return yaml.dump(cls._format(requests), default_flow_style=False)
-
-    @classmethod
-    def json(cls, requests):
-        return jsonpickle.encode(cls._format(requests))
 
     @classmethod
     def _format(cls, requests):
@@ -46,4 +39,18 @@ class SwaggerRenderer():
         swagger["paths"] = paths
 
         return swagger
+
+
+class SwaggerJsonRenderer(SwaggerRenderer):
+
+    @classmethod
+    def render(cls, requests):
+        return jsonpickle.encode(cls._format(requests))
+
+
+class SwaggerYamlRenderer(SwaggerRenderer):
+
+    @classmethod
+    def render(cls, requests):
+        return yaml.dump(cls._format(requests), default_flow_style=False)
 
